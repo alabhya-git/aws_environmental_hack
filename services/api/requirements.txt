@@ -1,0 +1,5 @@
+# Runtime dependencies of the Lambda. SciPy is intentionally absent (tests only).
+fastapi==0.115.0
+pydantic==2.11.5
+mangum==0.19.0
+numpy==2.3.2

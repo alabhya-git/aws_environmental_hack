@@ -1,0 +1,21 @@
+{
+  "dataset": "proofplate-demo-seed",
+  "schema_version": 1,
+  "status": "SIMULATED",
+  "seed": 20261011,
+  "generator": "scripts/make_demo_seed.py + evaluation/simulator.py",
+  "sha256": "144e207c1fe2bd61e371514e71066899cb15cdd4dcbb8a792790d2dcf7992e9b",
+  "units": "integer grams of cooked food; UTC timestamps",
+  "counts": {
+    "diners": 27,
+    "sessions": 9,
+    "events": 476
+  },
+  "collection_method": "None. Generated from a random seed and a stated behaviour model; five tokens are hand-scripted for the walkthrough.",
+  "limitations": [
+    "No real diner, kitchen or weighing is represented.",
+    "Generated appetites follow the simulator's assumptions; they are not evidence about real people.",
+    "Results computed on this seed must be labelled simulated."
+  ],
+  "license": "CC0-1.0 (generated for this project)"
+}

@@ -1,0 +1,17 @@
+{
+ "status": "GENERATED",
+ "note": "Rendered demonstration images, not photographs of real food.",
+ "seed": 20261012,
+ "before": {
+  "file": "pair-before.jpg",
+  "food_share_of_plate": 0.2365
+ },
+ "after": {
+  "file": "pair-after.jpg",
+  "food_share_of_plate": 0.0517,
+  "camera": "22% closer, off-centre, 8% darker"
+ },
+ "true_area_ratio": 0.2185,
+ "mass_exponent_assumed_by_generator": 1.35,
+ "true_mass_ratio": 0.1283
+}

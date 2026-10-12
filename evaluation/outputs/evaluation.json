@@ -1,0 +1,8822 @@
+{
+ "status": "SIMULATED",
+ "what_this_is": "Paired policy comparison in a labelled simulator. It is not a measurement of any real kitchen.",
+ "generated_at": "2026-10-11T14:02:29+00:00",
+ "seeds": [
+  101,
+  202,
+  303,
+  404,
+  505,
+  606,
+  707,
+  808
+ ],
+ "model_version": "censored-lognormal-grid/1.0",
+ "policy_version": "first-portion/1.0",
+ "split": "Chronological. Each learner starts empty, predicts before each meal and updates after it. Metrics are computed on the final third of meals only (the test period).",
+ "tuning": "One policy default (the limit on needing two trips for seconds) was chosen with evaluation/explore_policy.py on development seeds 9001-9002, which are not among the reported seeds. Nothing was chosen using the outputs reported here.",
+ "config": {
+  "serving": {
+   "scoop_g": 60.0,
+   "step_scoops": 0.5,
+   "min_scoops": 1.0,
+   "max_scoops": 8.0,
+   "refill_scoops": 0.5,
+   "refill_friction_g": 20.0,
+   "max_p_two_trips": 0.5,
+   "max_change_scoops": 1.0,
+   "conventional_scoops": 3.0,
+   "seconds_accessible": true,
+   "no_seconds_coverage": 0.8,
+   "min_evidence": 1
+  },
+  "grid": {
+   "mu_min_g": 15.0,
+   "mu_max_g": 1200.0,
+   "n_mu": 72,
+   "sigma_min": 0.06,
+   "sigma_max": 1.0,
+   "n_sigma": 30
+  },
+  "prior": {
+   "median_g": 180.0,
+   "mu_sd": 0.7,
+   "sigma_mode": 0.25,
+   "sigma_log_sd": 0.6,
+   "source": "default-assumption"
+  }
+ },
+ "equal_resources": "Every policy has the same seconds access, refill size, refill uptake and unlimited stock; kitchen surplus is prepared minus withdrawn under each policy's own preparation rule.",
+ "policies": [
+  {
+   "key": "conventional",
+   "label": "Fixed conventional portion (3 scoops)"
+  },
+  {
+   "key": "small_plus_seconds",
+   "label": "Fixed smaller portion (2 scoops) + seconds"
+  },
+  {
+   "key": "cohort",
+   "label": "Cohort history, same portion for everyone"
+  },
+  {
+   "key": "naive_average",
+   "label": "Personal moving average (ignores 'wanted more')"
+  },
+  {
+   "key": "proofplate",
+   "label": "ProofPlate: censored personal model"
+  }
+ ],
+ "metrics": [
+  {
+   "key": "plate_waste_g_per_plate",
+   "label": "Plate waste (g per plate)",
+   "direction": "lower"
+  },
+  {
+   "key": "left_hungry_rate",
+   "label": "Left wanting more, true share of plates",
+   "direction": "lower"
+  },
+  {
+   "key": "refill_trips_per_plate",
+   "label": "Trips for seconds per plate",
+   "direction": "lower"
+  },
+  {
+   "key": "kitchen_surplus_g_per_meal",
+   "label": "Kitchen surplus (g per meal)",
+   "direction": "lower"
+  },
+  {
+   "key": "stockout_meal_rate",
+   "label": "Meals where cooked food ran short",
+   "direction": "lower"
+  },
+  {
+   "key": "first_portion_g",
+   "label": "Mean first portion (g)",
+   "direction": "info"
+  },
+  {
+   "key": "eaten_g_per_plate",
+   "label": "Eaten (g per plate)",
+   "direction": "info"
+  },
+  {
+   "key": "reported_wanted_more_rate",
+   "label": "Reported 'wanted more' share",
+   "direction": "info"
+  }
+ ],
+ "scenarios": [
+  {
+   "name": "baseline",
+   "description": "Mixed appetites, learner's own distribution family.",
+   "generator": "lognormal",
+   "diners": 60,
+   "meals": 24,
+   "policies": {
+    "conventional": {
+     "plate_waste_g_per_plate": {
+      "mean": 28.93972811090218,
+      "lo": 26.115076440849215,
+      "hi": 31.764379780955146,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.1980085475885533,
+      "lo": 0.17644710366493543,
+      "hi": 0.21956999151217116,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.0810154096211964,
+      "lo": 0.962715949189072,
+      "hi": 1.1993148700533207,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2424.6875,
+      "lo": 2071.816291864156,
+      "hi": 2777.558708135844,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 180.0,
+      "lo": 180.0,
+      "hi": 180.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 183.72560373061958,
+      "lo": 177.70790667587454,
+      "hi": 189.74330078536462,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.17777876911783896,
+      "lo": 0.15878996015409888,
+      "hi": 0.19676757808157905,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "small_plus_seconds": {
+     "plate_waste_g_per_plate": {
+      "mean": 12.39634302482527,
+      "lo": 11.45841952546309,
+      "hi": 13.334266524187452,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.3578958626543213,
+      "lo": 0.32762830824474914,
+      "hi": 0.3881634170638934,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.9149440361354233,
+      "lo": 1.790432181917665,
+      "hi": 2.0394558903531816,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 1974.53125,
+      "lo": 1318.9330527106372,
+      "hi": 2630.129447289363,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.015625,
+      "lo": -0.021249999999999998,
+      "hi": 0.0525,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 120.0,
+      "lo": 120.0,
+      "hi": 120.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 165.25092693677635,
+      "lo": 160.81678617031736,
+      "hi": 169.68506770323535,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.31679148459195594,
+      "lo": 0.2956404531027844,
+      "hi": 0.33794251608112746,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -16.54338508607691,
+       "lo": -18.544353944860454,
+       "hi": -14.542416227293366,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.15988731506576798,
+       "lo": 0.1459430577193812,
+       "hi": 0.17383157241215474,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.833928626514227,
+       "lo": 0.790539604681573,
+       "hi": 0.8773176483468809,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": -450.15625,
+       "lo": -1196.3966033677466,
+       "hi": 296.0841033677467,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.015625,
+       "lo": -0.021249999999999998,
+       "hi": 0.0525,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "cohort": {
+     "plate_waste_g_per_plate": {
+      "mean": 30.48085505390736,
+      "lo": 26.974474479511755,
+      "hi": 33.98723562830296,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.1899126926662735,
+      "lo": 0.17049420918227712,
+      "hi": 0.2093311761502699,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.0366501246471032,
+      "lo": 0.9592840914187847,
+      "hi": 1.1140161578754217,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2620.46875,
+      "lo": 2217.400709789588,
+      "hi": 3023.536790210412,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 183.75,
+      "lo": 174.9,
+      "hi": 192.6,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 184.60654614045643,
+      "lo": 177.0815186886045,
+      "hi": 192.13157359230837,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.16967066100973086,
+      "lo": 0.15135666356493022,
+      "hi": 0.1879846584545315,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 1.5411269430051813,
+       "lo": -2.0959326424870457,
+       "hi": 5.178186528497408,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.008095854922279794,
+       "lo": -0.027202072538860103,
+       "hi": 0.011010362694300516,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.044365284974093255,
+       "lo": -0.14906735751295336,
+       "hi": 0.06033678756476683,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 195.78125,
+       "lo": -266.26250000000005,
+       "hi": 657.825,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "naive_average": {
+     "plate_waste_g_per_plate": {
+      "mean": 25.944420247379462,
+      "lo": 23.85309768114571,
+      "hi": 28.035742813613215,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.1431117808131338,
+      "lo": 0.11495769451241607,
+      "hi": 0.17126586711385156,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.8405512579865235,
+      "lo": 0.7217459674638816,
+      "hi": 0.9593565485091654,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2500.0,
+      "lo": 1969.919744957696,
+      "hi": 3030.080255042304,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 192.17712824881772,
+      "lo": 185.09242978999202,
+      "hi": 199.26182670764342,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 191.67259581690274,
+      "lo": 184.27239611084633,
+      "hi": 199.07279552295915,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.13131904457066695,
+      "lo": 0.10829035242005308,
+      "hi": 0.15434773672128083,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -2.9953078635227177,
+       "lo": -5.946794199359026,
+       "hi": -0.04382152768641001,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.05489676677541949,
+       "lo": -0.07960154416550172,
+       "hi": -0.03019198938533726,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.24046415163467272,
+       "lo": -0.3433595736634806,
+       "hi": -0.13756872960586486,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 75.3125,
+       "lo": -516.2454530804049,
+       "hi": 666.8704530804049,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "proofplate": {
+     "plate_waste_g_per_plate": {
+      "mean": 29.494452358448687,
+      "lo": 27.100353258115614,
+      "hi": 31.88855145878176,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.10755086519317689,
+      "lo": 0.09183683560507971,
+      "hi": 0.12326489478127406,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.6556308063491139,
+      "lo": 0.5619061329197447,
+      "hi": 0.749355479778483,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2883.28125,
+      "lo": 2449.4295639533843,
+      "hi": 3317.1329360466157,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 203.6493343972018,
+      "lo": 196.58462589821823,
+      "hi": 210.7140428961854,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 194.0644346815338,
+      "lo": 186.35578098159243,
+      "hi": 201.7730883814752,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.10030212307882638,
+      "lo": 0.08426561522083308,
+      "hi": 0.11633863093681969,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 0.5547242475465084,
+       "lo": -2.5173184336337817,
+       "hi": 3.6267669287267985,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.09045768239537641,
+       "lo": -0.10316587077531451,
+       "hi": -0.0777494940154383,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.4253846032720824,
+       "lo": -0.5253514748193461,
+       "hi": -0.3254177317248187,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 458.59375,
+       "lo": -183.45845512164146,
+       "hi": 1100.6459551216415,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    }
+   },
+   "prediction": {
+    "n_uncensored": 2009,
+    "mae_g": {
+     "mean": 35.63256965166732,
+     "lo": 34.10317670963502,
+     "hi": 37.16196259369961,
+     "n": 8
+    },
+    "coverage_80": {
+     "mean": 0.7970054352618341,
+     "lo": 0.7757010677630846,
+     "hi": 0.8183098027605836,
+     "n": 8
+    },
+    "mean_interval_width_g": {
+     "mean": 125.4499097658645,
+     "lo": 119.65371968044383,
+     "hi": 131.24609985128518,
+     "n": 8
+    },
+    "n_censored": 288,
+    "censored_mean_log_score": {
+     "mean": -0.8330314307237586,
+     "lo": -0.9111431121640075,
+     "hi": -0.7549197492835098,
+     "n": 8
+    }
+   },
+   "series_seed0": {
+    "conventional": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 38.43
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 27.04
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 26.02
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 27.04
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 30.82
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 35.82
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 30.41
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 28.45
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 27.47
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 22.09
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 25.53
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 31.06
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 37.49
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 30.0
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 28.88
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 27.56
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 24.98
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 27.38
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 35.86
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 21.14
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 24.88
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 22.66
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 39.78
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 33.81
+     }
+    ],
+    "small_plus_seconds": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 15.57
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 10.15
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 11.09
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 12.46
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 11.87
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 16.3
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 14.07
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 13.57
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 11.19
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 9.79
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 11.2
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 13.85
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 15.73
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 12.26
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 11.57
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 10.81
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 11.69
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 9.93
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 16.39
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 9.26
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 11.94
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 10.06
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 13.59
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 13.23
+     }
+    ],
+    "cohort": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 38.43
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 17.96
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 26.02
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 27.04
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 30.82
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 35.82
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 30.41
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 28.45
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 27.47
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 22.09
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 25.53
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 31.06
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 37.49
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 30.0
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 28.88
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 27.56
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 24.98
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 27.38
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 35.86
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 21.14
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 24.88
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 22.66
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 39.78
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 33.81
+     }
+    ],
+    "naive_average": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 38.43
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 21.57
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 23.09
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 21.52
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 27.36
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 30.38
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 21.61
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 20.37
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 24.12
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 23.15
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 18.88
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 25.08
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 37.8
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 31.26
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 28.45
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 22.81
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 24.83
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 25.24
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 27.47
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 16.74
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 23.35
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 21.0
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 33.48
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 22.46
+     }
+    ],
+    "proofplate": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 38.43
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 22.7
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 22.09
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 25.8
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 33.64
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 38.9
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 26.78
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 27.84
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 31.72
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 24.72
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 19.49
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 28.17
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 38.42
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 36.19
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 31.93
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 26.71
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 26.71
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 29.82
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 32.47
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 19.26
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 26.27
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 24.77
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 35.96
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 28.08
+     }
+    ]
+   }
+  },
+  {
+   "name": "gamma_family",
+   "description": "Demand drawn from a gamma family the learner does not assume.",
+   "generator": "gamma",
+   "diners": 60,
+   "meals": 24,
+   "policies": {
+    "conventional": {
+     "plate_waste_g_per_plate": {
+      "mean": 29.337183263566715,
+      "lo": 25.987987242812572,
+      "hi": 32.68637928432086,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.19512425247592263,
+      "lo": 0.16247389334825202,
+      "hi": 0.22777461160359325,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.1098640318658628,
+      "lo": 0.9769152166676608,
+      "hi": 1.242812847064065,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2277.1875,
+      "lo": 1944.5764016500866,
+      "hi": 2609.7985983499134,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.015625,
+      "lo": -0.021249999999999998,
+      "hi": 0.0525,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 180.0,
+      "lo": 180.0,
+      "hi": 180.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 184.2645911568601,
+      "lo": 177.4595981848358,
+      "hi": 191.06958412888437,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.1720630255360161,
+      "lo": 0.1465102065791937,
+      "hi": 0.1976158444928385,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3067
+    },
+    "small_plus_seconds": {
+     "plate_waste_g_per_plate": {
+      "mean": 13.089136094493094,
+      "lo": 11.634774730521316,
+      "hi": 14.543497458464872,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.362714616453541,
+      "lo": 0.32234020588918455,
+      "hi": 0.4030890270178974,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.952397389298428,
+      "lo": 1.8248860517007586,
+      "hi": 2.0799087268960976,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 1910.15625,
+      "lo": 1397.716649818959,
+      "hi": 2422.595850181041,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.015625,
+      "lo": -0.021249999999999998,
+      "hi": 0.0525,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 120.0,
+      "lo": 120.0,
+      "hi": 120.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 165.7293705745185,
+      "lo": 161.00345363057914,
+      "hi": 170.45528751845785,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.32058821849880964,
+      "lo": 0.2892846897107385,
+      "hi": 0.3518917472868808,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -16.248047169073622,
+       "lo": -18.532785138119696,
+       "hi": -13.96330920002755,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.16759036397761834,
+       "lo": 0.15480656911413612,
+       "hi": 0.18037415884110056,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.8425333574325654,
+       "lo": 0.8118701019385178,
+       "hi": 0.873196612926613,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": -367.03125,
+       "lo": -1035.4780620761567,
+       "hi": 301.4155620761567,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": -0.055749759768861006,
+       "hi": 0.055749759768861006,
+       "n": 8
+      }
+     },
+     "plates": 3067
+    },
+    "cohort": {
+     "plate_waste_g_per_plate": {
+      "mean": 29.337183263566715,
+      "lo": 25.987987242812572,
+      "hi": 32.68637928432086,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.19512425247592263,
+      "lo": 0.16247389334825202,
+      "hi": 0.22777461160359325,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.1098640318658628,
+      "lo": 0.9769152166676608,
+      "hi": 1.242812847064065,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2277.1875,
+      "lo": 1944.5764016500866,
+      "hi": 2609.7985983499134,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.015625,
+      "lo": -0.021249999999999998,
+      "hi": 0.0525,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 180.0,
+      "lo": 180.0,
+      "hi": 180.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 184.2645911568601,
+      "lo": 177.4595981848358,
+      "hi": 191.06958412888437,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.1720630255360161,
+      "lo": 0.1465102065791937,
+      "hi": 0.1976158444928385,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3067
+    },
+    "naive_average": {
+     "plate_waste_g_per_plate": {
+      "mean": 25.753096143090502,
+      "lo": 23.549812442218176,
+      "hi": 27.95637984396283,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.1461348327338588,
+      "lo": 0.11485618229029006,
+      "hi": 0.17741348317742756,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.8720269521100004,
+      "lo": 0.7647674942916611,
+      "hi": 0.9792864099283396,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2359.53125,
+      "lo": 1757.4736094546265,
+      "hi": 2961.5888905453735,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.015625,
+      "lo": -0.021249999999999998,
+      "hi": 0.0525,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 191.94325189422995,
+      "lo": 185.89768140330435,
+      "hi": 197.98882238515554,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 192.63749881699403,
+      "lo": 184.55571135064332,
+      "hi": 200.71928628334473,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.13332340088390401,
+      "lo": 0.10664884860663022,
+      "hi": 0.15999795316117782,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -3.5840871204762172,
+       "lo": -5.8928961951594285,
+       "hi": -1.2752780457930055,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.04898941974206385,
+       "lo": -0.07437870104256024,
+       "hi": -0.023600138441567452,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.23783707975586235,
+       "lo": -0.3534762878823435,
+       "hi": -0.12219787162938124,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 82.34375,
+       "lo": -553.4329334000236,
+       "hi": 718.1204334000236,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": -0.055749759768861006,
+       "hi": 0.055749759768861006,
+       "n": 8
+      }
+     },
+     "plates": 3067
+    },
+    "proofplate": {
+     "plate_waste_g_per_plate": {
+      "mean": 29.328469466575765,
+      "lo": 25.880646672740866,
+      "hi": 32.77629226041066,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.11075716652025176,
+      "lo": 0.08768998543541127,
+      "hi": 0.13382434760509226,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.6828081158171013,
+      "lo": 0.5816837921947088,
+      "hi": 0.7839324394394939,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2746.875,
+      "lo": 2100.0900828769604,
+      "hi": 3393.6599171230396,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 203.36025992924098,
+      "lo": 198.0454746160394,
+      "hi": 208.67504524244256,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 194.8101636273779,
+      "lo": 186.7903975155424,
+      "hi": 202.8299297392134,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.1057514216377144,
+      "lo": 0.08103580118114478,
+      "hi": 0.130467042094284,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -0.008713796990952982,
+       "lo": -2.613649120782234,
+       "hi": 2.596221526800328,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.08436708595567088,
+       "lo": -0.10612603067354881,
+       "hi": -0.06260814123779296,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.4270559160487614,
+       "lo": -0.5144243619855007,
+       "hi": -0.3396874701120222,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 469.6875,
+       "lo": -209.14034490133633,
+       "hi": 1148.5153449013364,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": -0.015625,
+       "lo": -0.0525,
+       "hi": 0.021249999999999998,
+       "n": 8
+      }
+     },
+     "plates": 3067
+    }
+   },
+   "prediction": {
+    "n_uncensored": 2004,
+    "mae_g": {
+     "mean": 35.232764822207315,
+     "lo": 33.885850330772,
+     "hi": 36.57967931364263,
+     "n": 8
+    },
+    "coverage_80": {
+     "mean": 0.794652463601938,
+     "lo": 0.7712350911191926,
+     "hi": 0.8180698360846833,
+     "n": 8
+    },
+    "mean_interval_width_g": {
+     "mean": 125.0731187152326,
+     "lo": 120.8242563523674,
+     "hi": 129.3219810780978,
+     "n": 8
+    },
+    "n_censored": 306,
+    "censored_mean_log_score": {
+     "mean": -0.7699287678817255,
+     "lo": -0.9048734088655525,
+     "hi": -0.6349841268978985,
+     "n": 8
+    }
+   },
+   "series_seed0": {
+    "conventional": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 36.78
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 26.49
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 30.14
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 28.63
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 28.6
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 34.11
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 25.0
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 32.37
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 31.21
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 23.06
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 18.96
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 28.29
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 31.25
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 32.4
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 29.79
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 30.74
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 23.02
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 36.02
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 28.65
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 29.45
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 26.23
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 20.67
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 36.65
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 32.14
+     }
+    ],
+    "small_plus_seconds": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 16.0
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 11.96
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 13.16
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 12.33
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 11.6
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 13.0
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 11.3
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 13.98
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 14.48
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 9.33
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 10.62
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 10.9
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 13.83
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 15.4
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 11.76
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 16.28
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 9.14
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 16.35
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 11.39
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 12.66
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 12.66
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 10.47
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 15.9
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 16.26
+     }
+    ],
+    "cohort": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 36.78
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 16.16
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 30.14
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 28.63
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 28.6
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 34.11
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 25.0
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 32.37
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 31.21
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 23.06
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 18.96
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 28.29
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 31.25
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 32.4
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 29.79
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 30.74
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 23.02
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 36.02
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 28.65
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 29.45
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 26.23
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 20.67
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 36.65
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 32.14
+     }
+    ],
+    "naive_average": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 36.78
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 20.35
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 23.92
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 18.17
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 27.31
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 22.74
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 19.57
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 23.84
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 27.65
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 15.92
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 15.23
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 28.1
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 30.15
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 27.38
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 26.88
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 25.04
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 15.42
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 34.14
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 30.69
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 21.7
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 23.47
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 15.09
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 33.67
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 33.44
+     }
+    ],
+    "proofplate": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 36.78
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 18.25
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 26.76
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 22.65
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 29.09
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 29.06
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 22.62
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 26.76
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 30.58
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 17.29
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 15.58
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 31.88
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 35.68
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 29.67
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 32.33
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 26.98
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 20.16
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 37.37
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 33.57
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 25.4
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 28.28
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 16.21
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 37.92
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 38.06
+     }
+    ]
+   }
+  },
+  {
+   "name": "two_mode_meals",
+   "description": "Each diner has light and heavy meals (bimodal): strong misspecification.",
+   "generator": "mixture",
+   "diners": 60,
+   "meals": 24,
+   "policies": {
+    "conventional": {
+     "plate_waste_g_per_plate": {
+      "mean": 35.231584705322504,
+      "lo": 32.0206552181864,
+      "hi": 38.44251419245861,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.19526839299899704,
+      "lo": 0.15967167427575352,
+      "hi": 0.23086511172224056,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.0764257434359972,
+      "lo": 0.9333563257178771,
+      "hi": 1.2194951611541172,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2364.84375,
+      "lo": 2009.3309644230178,
+      "hi": 2720.3565355769824,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.015625,
+      "lo": -0.021249999999999998,
+      "hi": 0.0525,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 180.0,
+      "lo": 180.0,
+      "hi": 180.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 177.19280961053158,
+      "lo": 170.19655192297859,
+      "hi": 184.18906729808458,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.176678779726052,
+      "lo": 0.14605388901632418,
+      "hi": 0.20730367043577982,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3056
+    },
+    "small_plus_seconds": {
+     "plate_waste_g_per_plate": {
+      "mean": 15.331019769380582,
+      "lo": 14.103558567132085,
+      "hi": 16.558480971629077,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.3386097527140913,
+      "lo": 0.2958951547198328,
+      "hi": 0.38132435070834986,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.8194599534349876,
+      "lo": 1.6777901158416841,
+      "hi": 1.961129791028291,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2059.375,
+      "lo": 1749.564300165177,
+      "hi": 2369.185699834823,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.015625,
+      "lo": -0.021249999999999998,
+      "hi": 0.0525,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 120.0,
+      "lo": 120.0,
+      "hi": 120.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 159.36667175194776,
+      "lo": 154.20323474096236,
+      "hi": 164.53010876293317,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.2952786012468339,
+      "lo": 0.25474915740789716,
+      "hi": 0.33580804508577067,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -19.900564935941922,
+       "lo": -21.93897605714301,
+       "hi": -17.862153814740836,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.14334135971509426,
+       "lo": 0.12285992838375617,
+       "hi": 0.16382279104643235,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.7430342099989904,
+       "lo": 0.7074622279439757,
+       "hi": 0.778606192054005,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": -305.46875,
+       "lo": -772.5359444658554,
+       "hi": 161.5984444658555,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3056
+    },
+    "cohort": {
+     "plate_waste_g_per_plate": {
+      "mean": 33.606247778098776,
+      "lo": 29.695925051379653,
+      "hi": 37.5165705048179,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.20503928248686765,
+      "lo": 0.17172760334305787,
+      "hi": 0.23835096163067743,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.1202262825195552,
+      "lo": 0.9589345288497746,
+      "hi": 1.281518036189336,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2477.8125,
+      "lo": 1960.0716666544035,
+      "hi": 2995.5533333455965,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.015625,
+      "lo": -0.021249999999999998,
+      "hi": 0.0525,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 176.25,
+      "lo": 167.4,
+      "hi": 185.1,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 176.37668702129605,
+      "lo": 168.6463602557473,
+      "hi": 184.1070137868448,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.18413616608968836,
+      "lo": 0.15521163174347286,
+      "hi": 0.21306070043590386,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -1.62533692722372,
+       "lo": -5.461132075471699,
+       "hi": 2.210458221024259,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.00977088948787062,
+       "lo": -0.013288409703504037,
+       "hi": 0.03283018867924528,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.043800539083557966,
+       "lo": -0.05956873315363882,
+       "hi": 0.14716981132075474,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 112.96875,
+       "lo": -153.63749999999993,
+       "hi": 379.57499999999993,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3056
+    },
+    "naive_average": {
+     "plate_waste_g_per_plate": {
+      "mean": 30.2330519804921,
+      "lo": 27.904994074306348,
+      "hi": 32.561109886677855,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.1749299752196835,
+      "lo": 0.14881994964114167,
+      "hi": 0.20104000079822534,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.0338247361656159,
+      "lo": 0.8960174184482668,
+      "hi": 1.171632053882965,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2519.375,
+      "lo": 1984.7914867127201,
+      "hi": 3053.95851328728,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.015625,
+      "lo": -0.021249999999999998,
+      "hi": 0.0525,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 182.06132162887167,
+      "lo": 174.69638105784227,
+      "hi": 189.42626219990106,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 182.9649671573803,
+      "lo": 174.22940474581267,
+      "hi": 191.70052956894793,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.1613618049836526,
+      "lo": 0.13547515616171527,
+      "hi": 0.18724845380558994,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -4.998532724830404,
+       "lo": -7.968478980248111,
+       "hi": -2.028586469412696,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.020338417779313552,
+       "lo": -0.04361894109777434,
+       "hi": 0.0029421055391472307,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.042601007270381366,
+       "lo": -0.1394265143199898,
+       "hi": 0.05422449977922707,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 154.53125,
+       "lo": -244.80087316646137,
+       "hi": 553.8633731664613,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3056
+    },
+    "proofplate": {
+     "plate_waste_g_per_plate": {
+      "mean": 32.46276369183084,
+      "lo": 29.546921686629435,
+      "hi": 35.378605697032235,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.15865513990854385,
+      "lo": 0.13069086754329803,
+      "hi": 0.18661941227378967,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.904919037249766,
+      "lo": 0.7726554550268467,
+      "hi": 1.0371826194726852,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2475.625,
+      "lo": 1949.2276910450626,
+      "hi": 3002.022308954937,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.03125,
+      "lo": -0.042499999999999996,
+      "hi": 0.105,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 190.25403596544916,
+      "lo": 184.3301673975076,
+      "hi": 196.17790453339072,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 185.07159294143077,
+      "lo": 176.86727002346484,
+      "hi": 193.2759158593967,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.14732984571193017,
+      "lo": 0.11989270193913636,
+      "hi": 0.17476698948472397,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -2.768821013491667,
+       "lo": -4.98958806067504,
+       "hi": -0.5480539663082946,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.0366132530904532,
+       "lo": -0.06262838357444825,
+       "hi": -0.010598122606458142,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.17150670618623126,
+       "lo": -0.2609252760109435,
+       "hi": -0.08208813636151902,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 110.78125,
+       "lo": -342.3720355642049,
+       "hi": 563.9345355642049,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.015625,
+       "lo": -0.021249999999999998,
+       "hi": 0.0525,
+       "n": 8
+      }
+     },
+     "plates": 3056
+    }
+   },
+   "prediction": {
+    "n_uncensored": 1863,
+    "mae_g": {
+     "mean": 48.44013137022212,
+     "lo": 45.68168621434331,
+     "hi": 51.19857652610093,
+     "n": 8
+    },
+    "coverage_80": {
+     "mean": 0.7826349387832954,
+     "lo": 0.7604528324463633,
+     "hi": 0.8048170451202274,
+     "n": 8
+    },
+    "mean_interval_width_g": {
+     "mean": 179.149130886641,
+     "lo": 170.6686738352808,
+     "hi": 187.62958793800118,
+     "n": 8
+    },
+    "n_censored": 427,
+    "censored_mean_log_score": {
+     "mean": -0.7056348557797443,
+     "lo": -0.7499305920701757,
+     "hi": -0.6613391194893129,
+     "n": 8
+    }
+   },
+   "series_seed0": {
+    "conventional": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 39.9
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 33.02
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 30.22
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 37.8
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 35.16
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 47.02
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 28.11
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 30.43
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 25.72
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 30.68
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 35.71
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 39.41
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 39.81
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 37.02
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 36.1
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 34.02
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 37.38
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 41.78
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 38.46
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 26.77
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 28.87
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 34.57
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 43.58
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 44.08
+     }
+    ],
+    "small_plus_seconds": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 15.62
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 15.89
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 12.84
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 18.36
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 13.78
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 21.24
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 12.28
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 13.83
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 12.17
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 11.95
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 17.22
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 18.93
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 15.11
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 14.08
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 17.73
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 16.27
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 16.82
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 20.18
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 14.67
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 11.9
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 10.28
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 16.09
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 16.74
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 20.0
+     }
+    ],
+    "cohort": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 39.9
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 22.89
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 18.47
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 37.8
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 35.16
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 47.02
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 28.11
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 30.43
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 25.72
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 30.68
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 35.71
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 39.41
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 39.81
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 37.02
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 36.1
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 34.02
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 37.38
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 41.78
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 38.46
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 26.77
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 28.87
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 34.57
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 43.58
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 44.08
+     }
+    ],
+    "naive_average": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 39.9
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 32.52
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 24.75
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 39.33
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 26.1
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 40.2
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 22.83
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 32.21
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 23.86
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 40.83
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 29.84
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 31.3
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 35.81
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 32.76
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 30.67
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 29.73
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 39.52
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 34.53
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 37.79
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 21.4
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 21.67
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 30.19
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 40.26
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 39.88
+     }
+    ],
+    "proofplate": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 39.9
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 32.76
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 25.08
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 41.27
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 29.51
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 44.2
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 26.26
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 33.77
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 23.36
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 42.93
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 31.57
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 34.15
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 38.23
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 40.88
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 36.35
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 31.0
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 42.22
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 39.06
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 41.88
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 25.02
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 21.72
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 35.28
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 41.32
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 40.43
+     }
+    ]
+   }
+  },
+  {
+   "name": "appetite_rises",
+   "description": "Half the diners' appetite rises 35% a third of the way in.",
+   "generator": "lognormal",
+   "diners": 60,
+   "meals": 24,
+   "policies": {
+    "conventional": {
+     "plate_waste_g_per_plate": {
+      "mean": 23.03320129573846,
+      "lo": 20.651807723602886,
+      "hi": 25.414594867874037,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.2750196850987896,
+      "lo": 0.2430201591306231,
+      "hi": 0.30701921106695607,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.629384789012001,
+      "lo": 1.4431064071862445,
+      "hi": 1.8156631708377575,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 3094.0625,
+      "lo": 2330.651672999721,
+      "hi": 3857.473327000279,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 180.0,
+      "lo": 180.0,
+      "hi": 180.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 205.78705956780829,
+      "lo": 198.258615339667,
+      "hi": 213.31550379594958,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.24863683534801706,
+      "lo": 0.22573611377691857,
+      "hi": 0.2715375569191155,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3057
+    },
+    "small_plus_seconds": {
+     "plate_waste_g_per_plate": {
+      "mean": 11.008968315080747,
+      "lo": 10.154802940659199,
+      "hi": 11.863133689502295,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.4447008379889368,
+      "lo": 0.4070338629085028,
+      "hi": 0.48236781306937077,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 2.4296051905088127,
+      "lo": 2.27105172451717,
+      "hi": 2.5881586565004553,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 3252.65625,
+      "lo": 2987.8188146981215,
+      "hi": 3517.4936853018785,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.015625,
+      "lo": -0.021249999999999998,
+      "hi": 0.0525,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 120.0,
+      "lo": 120.0,
+      "hi": 120.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 181.83501916290248,
+      "lo": 176.4022778393454,
+      "hi": 187.26776048645957,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.39238366997885965,
+      "lo": 0.3688218527123344,
+      "hi": 0.4159454872453849,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -12.024232980657713,
+       "lo": -13.577842823701738,
+       "hi": -10.470623137613687,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.1696811528901472,
+       "lo": 0.16048046795489979,
+       "hi": 0.17888183782539463,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.8002204014968121,
+       "lo": 0.7586212104691923,
+       "hi": 0.8418195925244318,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 158.59375,
+       "lo": -605.4170832918302,
+       "hi": 922.6045832918302,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.015625,
+       "lo": -0.021249999999999998,
+       "hi": 0.0525,
+       "n": 8
+      }
+     },
+     "plates": 3057
+    },
+    "cohort": {
+     "plate_waste_g_per_plate": {
+      "mean": 31.68940693433931,
+      "lo": 26.99836105460302,
+      "hi": 36.380452814075596,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.2224524860414369,
+      "lo": 0.1918971517057982,
+      "hi": 0.2530078203770756,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.3447045278198964,
+      "lo": 1.154247396024602,
+      "hi": 1.5351616596151907,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2832.96875,
+      "lo": 2202.9587390649767,
+      "hi": 3462.9787609350233,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 203.88671875,
+      "lo": 194.12318705024643,
+      "hi": 213.65025044975357,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 212.46849086712058,
+      "lo": 203.30089939948394,
+      "hi": 221.63608233475722,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.20230399358242485,
+      "lo": 0.17696235359932186,
+      "hi": 0.22764563356552783,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 8.656205638600849,
+       "lo": 4.927254048138856,
+       "hi": 12.385157229062841,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.05256719905735266,
+       "lo": -0.07479445600061978,
+       "hi": -0.030339942114085538,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.28468026119210454,
+       "lo": -0.4052428050784584,
+       "hi": -0.1641177173057507,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": -261.09375,
+       "lo": -886.8637416857787,
+       "hi": 364.6762416857787,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3057
+    },
+    "naive_average": {
+     "plate_waste_g_per_plate": {
+      "mean": 27.455795671678583,
+      "lo": 25.481032870907207,
+      "hi": 29.43055847244996,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.16129869291845889,
+      "lo": 0.14002383221934056,
+      "hi": 0.1825735536175772,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.006587764260493,
+      "lo": 0.8714636579932528,
+      "hi": 1.1417118705277332,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 3079.84375,
+      "lo": 2672.395595219904,
+      "hi": 3487.291904780096,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.015625,
+      "lo": -0.021249999999999998,
+      "hi": 0.0525,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 222.83227812464796,
+      "lo": 215.0960657373866,
+      "hi": 230.56849051190932,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 225.49137378358992,
+      "lo": 214.94493848330478,
+      "hi": 236.03780908387506,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.15025689547628035,
+      "lo": 0.1354871835872884,
+      "hi": 0.1650266073652723,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 4.422594375940124,
+       "lo": 2.345107766112341,
+       "hi": 6.500080985767906,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.11372099218033069,
+       "lo": -0.13988998571738148,
+       "hi": -0.0875519986432799,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.6227970247515079,
+       "lo": -0.7314008004443753,
+       "hi": -0.5141932490586405,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": -14.21875,
+       "lo": -838.7763436328727,
+       "hi": 810.3388436328727,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.015625,
+       "lo": -0.021249999999999998,
+       "hi": 0.0525,
+       "n": 8
+      }
+     },
+     "plates": 3057
+    },
+    "proofplate": {
+     "plate_waste_g_per_plate": {
+      "mean": 25.661640243295025,
+      "lo": 23.189749597034716,
+      "hi": 28.133530889555335,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.15273505262046377,
+      "lo": 0.1306478833900677,
+      "hi": 0.17482222185085985,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.0161376977250232,
+      "lo": 0.8738394174782026,
+      "hi": 1.1584359779718438,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 3011.71875,
+      "lo": 2558.7373070816966,
+      "hi": 3464.7001929183034,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.015625,
+      "lo": -0.021249999999999998,
+      "hi": 0.0525,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 220.67693686170963,
+      "lo": 213.85696037394715,
+      "hi": 227.49691334947212,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 225.4164899030805,
+      "lo": 214.7254727970689,
+      "hi": 236.1075070090921,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.1461612297031568,
+      "lo": 0.1293410583960758,
+      "hi": 0.16298140101023778,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 2.6284389475565617,
+       "lo": 0.45120654297010754,
+       "hi": 4.805671352143015,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.1222846324783258,
+       "lo": -0.1498945504940712,
+       "hi": -0.09467471446258041,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.6132470912869781,
+       "lo": -0.699737600379574,
+       "hi": -0.5267565821943822,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": -82.34375,
+       "lo": -1027.0400746923726,
+       "hi": 862.3525746923726,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.015625,
+       "lo": -0.021249999999999998,
+       "hi": 0.0525,
+       "n": 8
+      }
+     },
+     "plates": 3057
+    }
+   },
+   "prediction": {
+    "n_uncensored": 1906,
+    "mae_g": {
+     "mean": 41.5176876255662,
+     "lo": 37.98973781229407,
+     "hi": 45.04563743883833,
+     "n": 8
+    },
+    "coverage_80": {
+     "mean": 0.8287275021601371,
+     "lo": 0.7983291159914196,
+     "hi": 0.8591258883288546,
+     "n": 8
+    },
+    "mean_interval_width_g": {
+     "mean": 148.53829209900277,
+     "lo": 142.2788823181287,
+     "hi": 154.79770187987685,
+     "n": 8
+    },
+    "n_censored": 426,
+    "censored_mean_log_score": {
+     "mean": -0.8481613856872061,
+     "lo": -0.9354584104574128,
+     "hi": -0.7608643609169994,
+     "n": 8
+    }
+   },
+   "series_seed0": {
+    "conventional": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 31.09
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 28.3
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 26.71
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 30.19
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 33.19
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 32.43
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 28.73
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 25.19
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 24.37
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 20.74
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 16.64
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 19.5
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 25.93
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 21.41
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 23.43
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 21.49
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 20.9
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 22.94
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 22.22
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 18.44
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 13.54
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 13.48
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 27.17
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 24.46
+     }
+    ],
+    "small_plus_seconds": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 12.4
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 14.13
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 11.86
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 10.6
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 13.25
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 12.17
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 15.18
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 10.95
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 11.71
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 9.45
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 8.98
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 9.38
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 10.87
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 9.3
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 12.04
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 10.45
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 12.41
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 9.65
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 10.43
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 10.67
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 7.66
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 7.46
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 11.81
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 12.44
+     }
+    ],
+    "cohort": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 31.09
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 28.3
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 26.71
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 30.19
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 33.19
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 32.43
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 28.73
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 25.19
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 24.37
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 20.74
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 16.64
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 19.5
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 25.93
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 21.41
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 36.54
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 31.65
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 32.1
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 36.69
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 33.98
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 26.71
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 21.76
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 18.11
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 37.23
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 34.6
+     }
+    ],
+    "naive_average": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 31.09
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 21.04
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 22.88
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 26.5
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 30.12
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 27.13
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 19.98
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 19.33
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 31.84
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 15.55
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 17.83
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 15.38
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 30.24
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 24.22
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 23.15
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 24.29
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 23.44
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 33.82
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 30.41
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 21.23
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 16.46
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 19.93
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 47.29
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 27.38
+     }
+    ],
+    "proofplate": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 31.09
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 28.43
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 22.29
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 29.42
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 33.98
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 31.85
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 22.37
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 21.9
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 32.18
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 16.57
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 19.68
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 16.25
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 32.07
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 21.96
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 20.78
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 20.43
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 20.95
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 29.47
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 26.7
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 19.69
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 13.83
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 13.28
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 38.67
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 22.0
+     }
+    ]
+   }
+  },
+  {
+   "name": "late_joiners",
+   "description": "40% of diners first appear halfway through (cold starts).",
+   "generator": "lognormal",
+   "diners": 60,
+   "meals": 24,
+   "policies": {
+    "conventional": {
+     "plate_waste_g_per_plate": {
+      "mean": 29.359124181397714,
+      "lo": 26.348693386585342,
+      "hi": 32.36955497621008,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.19020882152427693,
+      "lo": 0.1674624320238094,
+      "hi": 0.21295521102474446,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.0719040934744317,
+      "lo": 0.9361931528222656,
+      "hi": 1.2076150341265979,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2436.875,
+      "lo": 2055.2716612763984,
+      "hi": 2818.4783387236016,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 180.0,
+      "lo": 180.0,
+      "hi": 180.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 182.8740111729917,
+      "lo": 175.98832486586394,
+      "hi": 189.75969748011943,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.17166585472947543,
+      "lo": 0.14988875523860942,
+      "hi": 0.19344295422034144,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "small_plus_seconds": {
+     "plate_waste_g_per_plate": {
+      "mean": 12.997466979158222,
+      "lo": 12.014316478743401,
+      "hi": 13.980617479573043,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.3359874164834038,
+      "lo": 0.29485439268373276,
+      "hi": 0.37712044028307484,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.947419725278857,
+      "lo": 1.8103806734613963,
+      "hi": 2.0844587770963177,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2437.8125,
+      "lo": 1764.3021579997826,
+      "hi": 3111.3228420002174,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.015625,
+      "lo": -0.021249999999999998,
+      "hi": 0.0525,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 120.0,
+      "lo": 120.0,
+      "hi": 120.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 165.48265464358906,
+      "lo": 160.64545102578631,
+      "hi": 170.3198582613918,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.3026661980938642,
+      "lo": 0.2708981346996145,
+      "hi": 0.3344342614881139,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -16.361657202239492,
+       "lo": -18.61731231392633,
+       "hi": -14.106002090552654,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.1457785949591269,
+       "lo": 0.1230363700582206,
+       "hi": 0.1685208198600332,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.8755156318044254,
+       "lo": 0.8416166911348077,
+       "hi": 0.909414572474043,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 0.9375,
+       "lo": -847.9132833993431,
+       "hi": 849.7882833993431,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.015625,
+       "lo": -0.021249999999999998,
+       "hi": 0.0525,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "cohort": {
+     "plate_waste_g_per_plate": {
+      "mean": 30.888269259117923,
+      "lo": 28.236025763940983,
+      "hi": 33.540512754294866,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.1847036401771267,
+      "lo": 0.17068791804343175,
+      "hi": 0.19871936231082166,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.0281864768941207,
+      "lo": 0.9277174707264071,
+      "hi": 1.1286554830618343,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2631.71875,
+      "lo": 2206.3784294878856,
+      "hi": 3057.0590705121144,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 183.75,
+      "lo": 174.9,
+      "hi": 192.6,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 183.79117574943103,
+      "lo": 175.23256701560723,
+      "hi": 192.34978448325484,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.16617134923496993,
+      "lo": 0.1529934265574326,
+      "hi": 0.17934927191250727,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 1.5291450777202074,
+       "lo": -2.0796373056994812,
+       "hi": 5.1379274611398955,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.005505181347150258,
+       "lo": -0.018497409326424866,
+       "hi": 0.007487046632124352,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.04371761658031087,
+       "lo": -0.1468911917098445,
+       "hi": 0.05945595854922277,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 194.84375,
+       "lo": -264.98749999999984,
+       "hi": 654.6749999999998,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "naive_average": {
+     "plate_waste_g_per_plate": {
+      "mean": 25.414778494894055,
+      "lo": 23.52983134081627,
+      "hi": 27.29972564897184,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.14501167066756054,
+      "lo": 0.12303664969676628,
+      "hi": 0.1669866916383548,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.8926439451354466,
+      "lo": 0.7938832357351929,
+      "hi": 0.9914046545357004,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2574.53125,
+      "lo": 2117.121224358979,
+      "hi": 3031.941275641021,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 189.03393891075348,
+      "lo": 180.55660487529457,
+      "hi": 197.5112729462124,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 190.47930722230012,
+      "lo": 181.41193586659568,
+      "hi": 199.54667857800456,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.1355406356936362,
+      "lo": 0.11855015243682016,
+      "hi": 0.15253111895045224,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -3.9443456865036586,
+       "lo": -7.238899998980467,
+       "hi": -0.6497913740268499,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.0451971508567164,
+       "lo": -0.06218899389339099,
+       "hi": -0.028205307820041804,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.1792601483389849,
+       "lo": -0.2823923531731014,
+       "hi": -0.07612794350486837,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 137.65625,
+       "lo": -322.71675898850907,
+       "hi": 598.0292589885091,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "proofplate": {
+     "plate_waste_g_per_plate": {
+      "mean": 28.968602627281875,
+      "lo": 26.411142699766724,
+      "hi": 31.526062554797026,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.11499287299299901,
+      "lo": 0.09710723010452786,
+      "hi": 0.13287851588147018,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.6960093151563504,
+      "lo": 0.5910838252377821,
+      "hi": 0.8009348050749188,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2878.28125,
+      "lo": 2530.492131008243,
+      "hi": 3226.070368991757,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 200.9047939962863,
+      "lo": 192.9969097759535,
+      "hi": 208.81267821661908,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 192.90345249427446,
+      "lo": 183.89909166368756,
+      "hi": 201.90781332486137,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.1090391030586435,
+      "lo": 0.09401915582907433,
+      "hi": 0.12405905028821268,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -0.39052155411583644,
+       "lo": -3.386983869688186,
+       "hi": 2.6059407614565133,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.07521594853127794,
+       "lo": -0.09269782649217548,
+       "hi": -0.05773407057038041,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.3758947783180811,
+       "lo": -0.46631795941696347,
+       "hi": -0.28547159721919874,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 441.40625,
+       "lo": -48.85082240996633,
+       "hi": 931.6633224099663,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    }
+   },
+   "prediction": {
+    "n_uncensored": 1986,
+    "mae_g": {
+     "mean": 36.08187120258253,
+     "lo": 33.55967323634035,
+     "hi": 38.604069168824715,
+     "n": 8
+    },
+    "coverage_80": {
+     "mean": 0.8094629962552389,
+     "lo": 0.7839487256116867,
+     "hi": 0.834977266898791,
+     "n": 8
+    },
+    "mean_interval_width_g": {
+     "mean": 133.93635436532568,
+     "lo": 126.79683323320785,
+     "hi": 141.07587549744352,
+     "n": 8
+    },
+    "n_censored": 312,
+    "censored_mean_log_score": {
+     "mean": -0.800065022032399,
+     "lo": -0.8644679962153272,
+     "hi": -0.7356620478494709,
+     "n": 8
+    }
+   },
+   "series_seed0": {
+    "conventional": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 34.33
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 32.48
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 30.38
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 23.86
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 24.91
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 35.52
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 31.96
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 29.95
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 28.83
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 23.42
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 27.54
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 28.07
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 33.8
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 30.28
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 31.29
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 31.12
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 27.83
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 29.38
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 33.18
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 25.55
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 28.94
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 21.87
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 38.28
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 34.48
+     }
+    ],
+    "small_plus_seconds": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 10.67
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 17.56
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 13.54
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 12.1
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 10.3
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 13.7
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 14.07
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 10.77
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 8.43
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 13.38
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 10.68
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 10.82
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 14.0
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 10.91
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 13.24
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 11.62
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 16.67
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 9.4
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 13.88
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 14.57
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 13.96
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 8.53
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 15.78
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 15.27
+     }
+    ],
+    "cohort": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 34.33
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 32.48
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 30.38
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 23.86
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 24.91
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 35.52
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 31.96
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 29.95
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 28.83
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 23.42
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 27.54
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 28.07
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 33.8
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 30.28
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 31.29
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 31.12
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 27.83
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 29.38
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 33.18
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 25.55
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 28.94
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 21.87
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 38.28
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 34.48
+     }
+    ],
+    "naive_average": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 34.33
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 30.84
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 30.81
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 18.86
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 21.61
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 26.52
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 21.78
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 14.05
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 29.13
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 22.38
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 20.21
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 16.43
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 31.42
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 21.38
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 25.12
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 24.52
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 28.19
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 25.56
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 20.45
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 20.71
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 25.16
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 20.43
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 30.28
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 28.81
+     }
+    ],
+    "proofplate": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 34.33
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 35.52
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 34.54
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 20.48
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 26.0
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 31.07
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 23.96
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 18.68
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 28.74
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 22.46
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 20.0
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 16.57
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 32.73
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 26.58
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 26.24
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 27.35
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 29.56
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 31.36
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 28.65
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 25.43
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 27.06
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 24.62
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 34.04
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 30.31
+     }
+    ]
+   }
+  },
+  {
+   "name": "disliked_recipe",
+   "description": "Three meals where the recipe went wrong and half the diners leave food.",
+   "generator": "lognormal",
+   "diners": 60,
+   "meals": 24,
+   "policies": {
+    "conventional": {
+     "plate_waste_g_per_plate": {
+      "mean": 33.60523126670913,
+      "lo": 29.5429262335854,
+      "hi": 37.66753629983286,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.17827334554135754,
+      "lo": 0.15221611210953578,
+      "hi": 0.2043305789731793,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.9725993276088525,
+      "lo": 0.8216987289826574,
+      "hi": 1.1234999262350476,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2577.5,
+      "lo": 2175.9658626192004,
+      "hi": 2979.0341373807996,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 180.0,
+      "lo": 180.0,
+      "hi": 180.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 175.8071754729471,
+      "lo": 167.3877962978743,
+      "hi": 184.2265546480199,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.16165416825287257,
+      "lo": 0.13533466595653537,
+      "hi": 0.18797367054920977,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "small_plus_seconds": {
+     "plate_waste_g_per_plate": {
+      "mean": 15.897387876518717,
+      "lo": 13.529868872231438,
+      "hi": 18.264906880805995,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.3197191199853946,
+      "lo": 0.2820337663533885,
+      "hi": 0.3574044736174007,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.7721299413174407,
+      "lo": 1.601332456308308,
+      "hi": 1.9429274263265734,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2103.125,
+      "lo": 1837.032149999425,
+      "hi": 2369.2178500005753,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.015625,
+      "lo": -0.021249999999999998,
+      "hi": 0.0525,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 120.0,
+      "lo": 120.0,
+      "hi": 120.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 157.47296150709465,
+      "lo": 150.28103382943087,
+      "hi": 164.66488918475844,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.2819760412209884,
+      "lo": 0.24597512192862148,
+      "hi": 0.31797696051335533,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -17.707843390190416,
+       "lo": -19.968161416573263,
+       "hi": -15.447525363807568,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.14144577444403705,
+       "lo": 0.12714527270972037,
+       "hi": 0.15574627617835374,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.7995306137085882,
+       "lo": 0.7456877247557971,
+       "hi": 0.8533735026613793,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": -474.375,
+       "lo": -755.0117819671134,
+       "hi": -193.73821803288666,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.015625,
+       "lo": -0.021249999999999998,
+       "hi": 0.0525,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "cohort": {
+     "plate_waste_g_per_plate": {
+      "mean": 36.93978750394178,
+      "lo": 33.183712928569776,
+      "hi": 40.695862079313784,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.16005999714649288,
+      "lo": 0.13568220546579682,
+      "hi": 0.18443778882718895,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.8880676104589993,
+      "lo": 0.7980549028234767,
+      "hi": 0.9780803180945219,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2963.90625,
+      "lo": 2486.816809454379,
+      "hi": 3440.995690545621,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 187.5,
+      "lo": 175.9126300284688,
+      "hi": 199.0873699715312,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 177.43972610159324,
+      "lo": 166.97294256047402,
+      "hi": 187.90650964271245,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.1449134634596816,
+      "lo": 0.1228810921837021,
+      "hi": 0.16694583473566108,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 3.334556237232647,
+       "lo": -1.8266811796630629,
+       "hi": 8.495793654128356,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.018213348394864652,
+       "lo": -0.04658284083117717,
+       "hi": 0.010156144041447868,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.0845317171498532,
+       "lo": -0.2151641304278492,
+       "hi": 0.04610069612814281,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 386.40625,
+       "lo": -210.6134053908347,
+       "hi": 983.4259053908347,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "naive_average": {
+     "plate_waste_g_per_plate": {
+      "mean": 27.889996293590137,
+      "lo": 23.714308955091475,
+      "hi": 32.0656836320888,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.15817346692750398,
+      "lo": 0.12915502067706133,
+      "hi": 0.18719191317794662,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.8902244913135524,
+      "lo": 0.766863512522097,
+      "hi": 1.0135854701050078,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2827.03125,
+      "lo": 2321.121627615522,
+      "hi": 3332.940872384478,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 182.96068227266915,
+      "lo": 176.416306460505,
+      "hi": 189.50505808483328,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 182.0202954684471,
+      "lo": 172.09101024185176,
+      "hi": 191.94958069504244,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.1473870254475569,
+      "lo": 0.11874264160470191,
+      "hi": 0.17603140929041192,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -5.715234973118998,
+       "lo": -8.789391813479163,
+       "hi": -2.6410781327588326,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.020099878613853563,
+       "lo": -0.04294652186361192,
+       "hi": 0.0027467646359047894,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.0823748362953001,
+       "lo": -0.14099446289222695,
+       "hi": -0.023755209698373234,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 249.53125,
+       "lo": -276.4020490399662,
+       "hi": 775.4645490399662,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "proofplate": {
+     "plate_waste_g_per_plate": {
+      "mean": 34.69914496415106,
+      "lo": 29.8794749367697,
+      "hi": 39.518814991532416,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.10153597375228787,
+      "lo": 0.08338542183054834,
+      "hi": 0.1196865256740274,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.5689013990509793,
+      "lo": 0.4855613383276131,
+      "hi": 0.6522414597743454,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2926.5625,
+      "lo": 2359.5746296215852,
+      "hi": 3493.5503703784148,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 203.69847232530728,
+      "lo": 197.01555325666996,
+      "hi": 210.3813913939446,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 186.32312364966396,
+      "lo": 176.79921976578808,
+      "hi": 195.84702753353983,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.10053374854706046,
+      "lo": 0.0812544369377142,
+      "hi": 0.11981306015640672,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 1.093913697441923,
+       "lo": -1.811721671809472,
+       "hi": 3.999549066693318,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.07673737178906967,
+       "lo": -0.09835303517334347,
+       "hi": -0.05512170840479587,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.40369792855787323,
+       "lo": -0.5116797310384477,
+       "hi": -0.29571612607729875,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 349.0625,
+       "lo": -382.1819925769404,
+       "hi": 1080.3069925769405,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    }
+   },
+   "prediction": {
+    "n_uncensored": 1870,
+    "mae_g": {
+     "mean": 33.93771878704964,
+     "lo": 32.35721276520046,
+     "hi": 35.51822480889882,
+     "n": 8
+    },
+    "coverage_80": {
+     "mean": 0.8130221465854977,
+     "lo": 0.7949697947029492,
+     "hi": 0.8310744984680462,
+     "n": 8
+    },
+    "mean_interval_width_g": {
+     "mean": 123.36260336447077,
+     "lo": 118.0482661708129,
+     "hi": 128.67694055812865,
+     "n": 8
+    },
+    "n_censored": 290,
+    "censored_mean_log_score": {
+     "mean": -0.7397659439382007,
+     "lo": -0.7911037663910642,
+     "hi": -0.6884281214853373,
+     "n": 8
+    }
+   },
+   "series_seed0": {
+    "conventional": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 35.7
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 25.85
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 21.02
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 24.32
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 39.0
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 38.78
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 28.83
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 28.2
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 65.56
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 56.6
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 57.12
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 28.44
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 36.27
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 32.62
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 24.86
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 28.17
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 25.79
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 31.18
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 29.55
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 28.6
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 24.45
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 23.34
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 38.24
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 32.44
+     }
+    ],
+    "small_plus_seconds": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 16.72
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 13.96
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 10.96
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 10.98
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 15.31
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 17.96
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 10.61
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 13.41
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 37.84
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 33.83
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 33.29
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 12.21
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 15.18
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 13.36
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 8.0
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 10.38
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 13.92
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 14.09
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 12.8
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 14.38
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 9.57
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 12.47
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 14.72
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 15.06
+     }
+    ],
+    "cohort": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 35.7
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 25.85
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 21.02
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 24.32
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 39.0
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 38.78
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 28.83
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 28.2
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 65.56
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 56.6
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 57.12
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 28.44
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 36.27
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 32.62
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 24.86
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 28.17
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 25.79
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 31.18
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 29.55
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 28.6
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 24.45
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 23.34
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 38.24
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 32.44
+     }
+    ],
+    "naive_average": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 35.7
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 23.83
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 18.72
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 16.54
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 32.46
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 30.3
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 15.17
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 19.88
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 66.14
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 52.98
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 46.06
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 19.54
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 25.42
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 21.53
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 12.88
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 18.25
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 19.1
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 26.64
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 21.9
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 24.21
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 15.57
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 19.13
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 32.35
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 24.92
+     }
+    ],
+    "proofplate": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 35.7
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 24.04
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 21.24
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 20.74
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 38.56
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 38.06
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 20.11
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 24.59
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 77.02
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 70.85
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 57.51
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 24.35
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 40.11
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 32.72
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 23.05
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 25.65
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 28.25
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 35.73
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 26.37
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 28.67
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 21.16
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 22.79
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 36.87
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 27.27
+     }
+    ]
+   }
+  },
+  {
+   "name": "missing_returns",
+   "description": "A quarter of plates never get a return recorded.",
+   "generator": "lognormal",
+   "diners": 60,
+   "meals": 24,
+   "policies": {
+    "conventional": {
+     "plate_waste_g_per_plate": {
+      "mean": 28.93972811090218,
+      "lo": 26.115076440849215,
+      "hi": 31.764379780955146,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.1980085475885533,
+      "lo": 0.17644710366493543,
+      "hi": 0.21956999151217116,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.0810154096211964,
+      "lo": 0.962715949189072,
+      "hi": 1.1993148700533207,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2424.6875,
+      "lo": 2071.816291864156,
+      "hi": 2777.558708135844,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 180.0,
+      "lo": 180.0,
+      "hi": 180.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 183.72560373061958,
+      "lo": 177.70790667587454,
+      "hi": 189.74330078536462,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.18551874611846395,
+      "lo": 0.16661990814616034,
+      "hi": 0.20441758409076755,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "small_plus_seconds": {
+     "plate_waste_g_per_plate": {
+      "mean": 12.39634302482527,
+      "lo": 11.45841952546309,
+      "hi": 13.334266524187452,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.3578958626543213,
+      "lo": 0.32762830824474914,
+      "hi": 0.3881634170638934,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.9149440361354233,
+      "lo": 1.790432181917665,
+      "hi": 2.0394558903531816,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 1974.53125,
+      "lo": 1318.9330527106372,
+      "hi": 2630.129447289363,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.015625,
+      "lo": -0.021249999999999998,
+      "hi": 0.0525,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 120.0,
+      "lo": 120.0,
+      "hi": 120.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 165.25092693677635,
+      "lo": 160.81678617031736,
+      "hi": 169.68506770323535,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.31883688531726784,
+      "lo": 0.29733420791636805,
+      "hi": 0.3403395627181676,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -16.54338508607691,
+       "lo": -18.544353944860454,
+       "hi": -14.542416227293366,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.15988731506576798,
+       "lo": 0.1459430577193812,
+       "hi": 0.17383157241215474,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.833928626514227,
+       "lo": 0.790539604681573,
+       "hi": 0.8773176483468809,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": -450.15625,
+       "lo": -1196.3966033677466,
+       "hi": 296.0841033677467,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.015625,
+       "lo": -0.021249999999999998,
+       "hi": 0.0525,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "cohort": {
+     "plate_waste_g_per_plate": {
+      "mean": 31.636207534325113,
+      "lo": 28.574492977899418,
+      "hi": 34.69792209075081,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.18534350206575131,
+      "lo": 0.16550833860737021,
+      "hi": 0.20517866552413241,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.0095613518011501,
+      "lo": 0.9559569512249346,
+      "hi": 1.0631657523773657,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2738.4375,
+      "lo": 2348.1056654680124,
+      "hi": 3128.7693345319876,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 186.17819843342036,
+      "lo": 176.34602760786717,
+      "hi": 196.01036925897355,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 185.07111674662522,
+      "lo": 177.13111542281467,
+      "hi": 193.01111807043577,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.17252485244030302,
+      "lo": 0.1529682094025562,
+      "hi": 0.19208149547804984,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 2.6964794234229355,
+       "lo": -1.5259981976234847,
+       "hi": 6.918957044469355,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.012665045522801986,
+       "lo": -0.03321892062674864,
+       "hi": 0.007888829581144667,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.07145405782004624,
+       "lo": -0.18607108169999995,
+       "hi": 0.043162966059907465,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 313.75,
+       "lo": -190.4735237223665,
+       "hi": 817.9735237223665,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "naive_average": {
+     "plate_waste_g_per_plate": {
+      "mean": 26.13519878977334,
+      "lo": 23.87859155370698,
+      "hi": 28.391806025839703,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.1423129287007993,
+      "lo": 0.11768410013811137,
+      "hi": 0.16694175726348726,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.854924325051553,
+      "lo": 0.7403336241704171,
+      "hi": 0.9695150259326889,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2497.65625,
+      "lo": 1966.5270751737978,
+      "hi": 3028.785424826202,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 191.78421692655076,
+      "lo": 184.2116827091688,
+      "hi": 199.3567511439327,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 191.53441122506524,
+      "lo": 183.83388199119443,
+      "hi": 199.23494045893605,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.1359362559095703,
+      "lo": 0.11426287273900705,
+      "hi": 0.1576096390801336,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -2.8045293211288413,
+       "lo": -5.882861617965997,
+       "hi": 0.27380297570831447,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.055695618887754,
+       "lo": -0.08143053291558577,
+       "hi": -0.02996070485992223,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.22609108456964327,
+       "lo": -0.32760137438607523,
+       "hi": -0.12458079475321134,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 72.96875,
+       "lo": -507.36748823957635,
+       "hi": 653.3049882395763,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "proofplate": {
+     "plate_waste_g_per_plate": {
+      "mean": 29.6602543651304,
+      "lo": 27.83415773943458,
+      "hi": 31.486350990826217,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.1082252526126099,
+      "lo": 0.09249678701929911,
+      "hi": 0.12395371820592069,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.6705201779430185,
+      "lo": 0.5820652953466308,
+      "hi": 0.7589750605394063,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2956.25,
+      "lo": 2433.9907852314004,
+      "hi": 3478.5092147685996,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 203.31882380341233,
+      "lo": 196.16164730922077,
+      "hi": 210.4760002976039,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 194.01509436640396,
+      "lo": 186.0876152979379,
+      "hi": 201.94257343487,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.10062831649476178,
+      "lo": 0.08801443937919398,
+      "hi": 0.11324219361032958,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 0.7205262542282198,
+       "lo": -2.2620883122590647,
+       "hi": 3.7031408207155043,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.0897832949759434,
+       "lo": -0.10432848621623143,
+       "hi": -0.07523810373565536,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.4104952316781776,
+       "lo": -0.5050249494878494,
+       "hi": -0.31596551386850585,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 531.5625,
+       "lo": -181.82092160978095,
+       "hi": 1244.945921609781,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    }
+   },
+   "prediction": {
+    "n_uncensored": 1555,
+    "mae_g": {
+     "mean": 36.163379504672754,
+     "lo": 34.19245019919831,
+     "hi": 38.134308810147196,
+     "n": 8
+    },
+    "coverage_80": {
+     "mean": 0.8101742766399653,
+     "lo": 0.7814836415933597,
+     "hi": 0.838864911686571,
+     "n": 8
+    },
+    "mean_interval_width_g": {
+     "mean": 128.1700242952427,
+     "lo": 121.04645615929563,
+     "hi": 135.29359243118978,
+     "n": 8
+    },
+    "n_censored": 225,
+    "censored_mean_log_score": {
+     "mean": -0.820128127939588,
+     "lo": -0.906271456814749,
+     "hi": -0.733984799064427,
+     "n": 8
+    }
+   },
+   "series_seed0": {
+    "conventional": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 38.43
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 27.04
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 26.02
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 27.04
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 30.82
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 35.82
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 30.41
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 28.45
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 27.47
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 22.09
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 25.53
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 31.06
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 37.49
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 30.0
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 28.88
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 27.56
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 24.98
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 27.38
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 35.86
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 21.14
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 24.88
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 22.66
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 39.78
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 33.81
+     }
+    ],
+    "small_plus_seconds": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 15.57
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 10.15
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 11.09
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 12.46
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 11.87
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 16.3
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 14.07
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 13.57
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 11.19
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 9.79
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 11.2
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 13.85
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 15.73
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 12.26
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 11.57
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 10.81
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 11.69
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 9.93
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 16.39
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 9.26
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 11.94
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 10.06
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 13.59
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 13.23
+     }
+    ],
+    "cohort": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 38.43
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 17.96
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 26.02
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 27.04
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 30.82
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 35.82
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 30.41
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 28.45
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 27.47
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 22.09
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 25.53
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 31.06
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 37.49
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 30.0
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 28.88
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 27.56
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 24.98
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 27.38
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 35.86
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 21.14
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 24.88
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 22.66
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 39.78
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 33.81
+     }
+    ],
+    "naive_average": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 38.43
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 21.83
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 21.11
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 20.3
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 28.41
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 27.94
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 21.93
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 19.59
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 25.23
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 19.98
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 19.63
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 24.85
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 32.29
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 28.4
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 25.98
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 21.92
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 25.63
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 24.96
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 28.53
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 18.17
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 23.12
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 22.23
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 33.93
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 23.06
+     }
+    ],
+    "proofplate": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 38.43
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 22.11
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 24.11
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 25.18
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 32.13
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 37.16
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 25.0
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 27.69
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 34.19
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 24.11
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 20.94
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 29.77
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 37.42
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 35.55
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 33.5
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 25.67
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 25.4
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 27.87
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 33.69
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 20.67
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 28.12
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 26.09
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 36.39
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 28.25
+     }
+    ]
+   }
+  },
+  {
+   "name": "seconds_friction",
+   "description": "Only half of diners who want more walk back for seconds.",
+   "generator": "lognormal",
+   "diners": 60,
+   "meals": 24,
+   "policies": {
+    "conventional": {
+     "plate_waste_g_per_plate": {
+      "mean": 25.641262962712904,
+      "lo": 22.688433968755092,
+      "hi": 28.594091956670717,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.3959010378456257,
+      "lo": 0.35511447154720677,
+      "hi": 0.4366876041440446,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.3974286749446958,
+      "lo": 0.35823955770222893,
+      "hi": 0.4366177921871627,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 3398.28125,
+      "lo": 3136.3428339761904,
+      "hi": 3660.2196660238096,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 180.0,
+      "lo": 180.0,
+      "hi": 180.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 166.51570270169663,
+      "lo": 162.84109830268156,
+      "hi": 170.1903071007117,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.35772776854161725,
+      "lo": 0.32565909277822314,
+      "hi": 0.38979644430501137,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "small_plus_seconds": {
+     "plate_waste_g_per_plate": {
+      "mean": 7.891291556534506,
+      "lo": 6.988295687217988,
+      "hi": 8.794287425851024,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.6506224696454843,
+      "lo": 0.6174967358810328,
+      "hi": 0.6837482034099358,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.6788698397219721,
+      "lo": 0.620726603247716,
+      "hi": 0.7370130761962282,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 3264.6875,
+      "lo": 3060.56209370393,
+      "hi": 3468.81290629607,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 120.0,
+      "lo": 120.0,
+      "hi": 120.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 132.67262180958147,
+      "lo": 130.28179569475657,
+      "hi": 135.06344792440638,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.5697571645912556,
+      "lo": 0.5461010448264404,
+      "hi": 0.5934132843560708,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -17.749971406178396,
+       "lo": -19.902606907844678,
+       "hi": -15.597335904512112,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.2547214317998586,
+       "lo": 0.23197953725612308,
+       "hi": 0.27746332634359416,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.2814411647772763,
+       "lo": 0.24324850376138646,
+       "hi": 0.3196338257931662,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": -133.59375,
+       "lo": -339.86969748849606,
+       "hi": 72.68219748849603,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "cohort": {
+     "plate_waste_g_per_plate": {
+      "mean": 27.260757781365754,
+      "lo": 23.642051171936757,
+      "hi": 30.87946439079475,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.3803569963948485,
+      "lo": 0.3528846918128463,
+      "hi": 0.40782930097685066,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.3851229754628305,
+      "lo": 0.3393465944985019,
+      "hi": 0.43089935642715904,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 3235.15625,
+      "lo": 2721.9109182821812,
+      "hi": 3748.4015817178188,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 183.75,
+      "lo": 174.9,
+      "hi": 192.6,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 168.28079670114022,
+      "lo": 161.7547138356226,
+      "hi": 174.80687956665784,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.34286290367675243,
+      "lo": 0.3237813729000466,
+      "hi": 0.36194443445345825,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 1.6194948186528495,
+       "lo": -2.2025129533678753,
+       "hi": 5.441502590673574,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.015544041450777202,
+       "lo": -0.0522279792746114,
+       "hi": 0.021139896373056993,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.012305699481865287,
+       "lo": -0.041347150259067364,
+       "hi": 0.016735751295336786,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": -163.125,
+       "lo": -548.0999999999999,
+       "hi": 221.8499999999999,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "naive_average": {
+     "plate_waste_g_per_plate": {
+      "mean": 13.564761251208724,
+      "lo": 12.232738789374602,
+      "hi": 14.896783713042845,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.4794236370209408,
+      "lo": 0.4340491313269066,
+      "hi": 0.524798142714975,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.4949921560861962,
+      "lo": 0.44538758177388404,
+      "hi": 0.5445967303985083,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2598.59375,
+      "lo": 1768.833076837815,
+      "hi": 3428.354423162185,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 166.72536560840274,
+      "lo": 162.4480211627019,
+      "hi": 171.00271005410357,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 168.2163661581668,
+      "lo": 163.83311992385302,
+      "hi": 172.5996123924806,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.433935267611411,
+      "lo": 0.3982672986027099,
+      "hi": 0.4696032366201121,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -12.07650171150418,
+       "lo": -14.468229506117726,
+       "hi": -9.684773916890634,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.08352259917531507,
+       "lo": 0.05934090910152562,
+       "hi": 0.10770428924910452,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.09756348114150037,
+       "lo": 0.07349500704014042,
+       "hi": 0.12163195524286033,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": -799.6875,
+       "lo": -1602.1453571906216,
+       "hi": 2.770357190621553,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    },
+    "proofplate": {
+     "plate_waste_g_per_plate": {
+      "mean": 25.105132905030203,
+      "lo": 22.51174132589842,
+      "hi": 27.698524484161986,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.2837354918745064,
+      "lo": 0.2497822978508487,
+      "hi": 0.3176886858981641,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.3045080597628509,
+      "lo": 0.2606338585742944,
+      "hi": 0.3483822609514074,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2591.71875,
+      "lo": 2180.1760256473103,
+      "hi": 3003.2614743526897,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 200.56237506034915,
+      "lo": 193.8568004303033,
+      "hi": 207.267949690395,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 184.82699261820983,
+      "lo": 178.4085876880356,
+      "hi": 191.24539754838406,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.26485195224345565,
+      "lo": 0.23112636536690923,
+      "hi": 0.29857753912000207,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -0.5361300576827,
+       "lo": -3.739901121491029,
+       "hi": 2.667641006125629,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.11216554597111927,
+       "lo": -0.1459690125844016,
+       "hi": -0.07836207935783697,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.09292061518184493,
+       "lo": -0.10963428345497761,
+       "hi": -0.07620694690871224,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": -806.5625,
+       "lo": -1059.1469061097625,
+       "hi": -553.9780938902376,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3035
+    }
+   },
+   "prediction": {
+    "n_uncensored": 1536,
+    "mae_g": {
+     "mean": 30.442554607504007,
+     "lo": 28.599627061382794,
+     "hi": 32.285482153625225,
+     "n": 8
+    },
+    "coverage_80": {
+     "mean": 0.7947700289102365,
+     "lo": 0.7605889725059408,
+     "hi": 0.8289510853145322,
+     "n": 8
+    },
+    "mean_interval_width_g": {
+     "mean": 118.09578814972411,
+     "lo": 112.65779964474478,
+     "hi": 123.53377665470344,
+     "n": 8
+    },
+    "n_censored": 761,
+    "censored_mean_log_score": {
+     "mean": -0.6041823619934537,
+     "lo": -0.6538685185344276,
+     "hi": -0.5544962054524797,
+     "n": 8
+    }
+   },
+   "series_seed0": {
+    "conventional": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 36.37
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 23.5
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 23.65
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 23.86
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 28.21
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 31.5
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 28.15
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 25.98
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 24.3
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 17.17
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 21.69
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 25.77
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 32.58
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 27.64
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 26.4
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 24.75
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 18.94
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 25.64
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 31.16
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 17.52
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 22.41
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 19.15
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 37.57
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 29.19
+     }
+    ],
+    "small_plus_seconds": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 11.5
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 5.15
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 8.28
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 8.68
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 8.1
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 10.36
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 7.91
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 8.39
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 7.28
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 3.85
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 6.55
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 8.77
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 9.51
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 7.89
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 7.83
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 6.6
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 4.48
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 4.13
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 10.61
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 6.31
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 7.55
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 5.26
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 11.43
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 9.38
+     }
+    ],
+    "cohort": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 36.37
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 13.76
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 23.65
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 23.86
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 28.21
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 31.5
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 28.15
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 25.98
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 24.3
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 17.17
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 21.69
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 25.77
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 32.58
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 27.64
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 26.4
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 24.75
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 18.94
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 25.64
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 31.16
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 17.52
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 22.41
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 19.15
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 37.57
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 29.19
+     }
+    ],
+    "naive_average": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 36.37
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 12.04
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 13.0
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 14.08
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 11.13
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 16.34
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 10.59
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 11.67
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 14.02
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 8.66
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 7.96
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 10.52
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 17.11
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 15.87
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 13.52
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 14.4
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 10.08
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 11.42
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 15.29
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 7.12
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 11.88
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 9.89
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 15.85
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 11.25
+     }
+    ],
+    "proofplate": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 36.37
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 16.93
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 20.83
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 25.08
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 30.08
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 34.9
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 23.11
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 22.16
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 27.86
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 18.45
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 14.69
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 19.67
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 34.98
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 29.47
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 27.12
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 21.33
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 19.33
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 25.51
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 25.82
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 14.33
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 21.82
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 18.85
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 30.48
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 25.1
+     }
+    ]
+   }
+  },
+  {
+   "name": "demand_spike",
+   "description": "Three late meals with a jump in attendance and appetite.",
+   "generator": "lognormal",
+   "diners": 60,
+   "meals": 24,
+   "policies": {
+    "conventional": {
+     "plate_waste_g_per_plate": {
+      "mean": 27.10714656927241,
+      "lo": 24.788760695378173,
+      "hi": 29.425532443166645,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.20807060206995226,
+      "lo": 0.18048962976522845,
+      "hi": 0.23565157437467607,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.213379759104376,
+      "lo": 1.0535828322093457,
+      "hi": 1.3731766859994063,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 1967.03125,
+      "lo": 1747.281751089979,
+      "hi": 2186.780748910021,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.21875,
+      "lo": 0.1704692917852867,
+      "hi": 0.2670307082147133,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 180.0,
+      "lo": 180.0,
+      "hi": 180.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 189.22559365659032,
+      "lo": 182.33905402926322,
+      "hi": 196.11213328391742,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.1910167196294316,
+      "lo": 0.16076195588102676,
+      "hi": 0.22127148337783642,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3219
+    },
+    "small_plus_seconds": {
+     "plate_waste_g_per_plate": {
+      "mean": 12.434909587056287,
+      "lo": 11.472266403679761,
+      "hi": 13.397552770432814,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.36439948219340945,
+      "lo": 0.3281489133731824,
+      "hi": 0.4006500510136365,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 2.079822332546957,
+      "lo": 1.923098228318768,
+      "hi": 2.2365464367751464,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2385.78125,
+      "lo": 1798.5491698716069,
+      "hi": 2973.013330128393,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.171875,
+      "lo": 0.11789552721503427,
+      "hi": 0.22585447278496573,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 120.0,
+      "lo": 120.0,
+      "hi": 120.0,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 169.90605264516932,
+      "lo": 164.62115506751496,
+      "hi": 175.1909502228237,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.32532297619813977,
+      "lo": 0.28848052212548025,
+      "hi": 0.3621654302707993,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -14.67223698221612,
+       "lo": -16.37013404419617,
+       "hi": -12.974339920236067,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": 0.15632888012345714,
+       "lo": 0.14186463868422483,
+       "hi": 0.17079312156268944,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": 0.8664425734425815,
+       "lo": 0.8071860820873807,
+       "hi": 0.9256990647977822,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 418.75,
+       "lo": -211.48445205222743,
+       "hi": 1048.9844520522274,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": -0.046875,
+       "lo": -0.10085447278496573,
+       "hi": 0.007104472784965732,
+       "n": 8
+      }
+     },
+     "plates": 3219
+    },
+    "cohort": {
+     "plate_waste_g_per_plate": {
+      "mean": 30.12249467053823,
+      "lo": 27.045724449092255,
+      "hi": 33.19926489198421,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.19102444584889638,
+      "lo": 0.16599497992482837,
+      "hi": 0.2160539117729644,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 1.1212101079774848,
+      "lo": 1.0174161504644017,
+      "hi": 1.2250040654905678,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2166.875,
+      "lo": 1724.9914174403916,
+      "hi": 2608.7585825596084,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.21875,
+      "lo": 0.1704692917852867,
+      "hi": 0.2670307082147133,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 187.5,
+      "lo": 175.9126300284688,
+      "hi": 199.0873699715312,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 190.94309268694013,
+      "lo": 181.6721126655278,
+      "hi": 200.21407270835246,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.17418377872360066,
+      "lo": 0.14703823119220116,
+      "hi": 0.20132932625500016,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 3.015348101265823,
+       "lo": -1.6827135865270857,
+       "hi": 7.713409789058732,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.017046156221055882,
+       "lo": -0.04358956192357717,
+       "hi": 0.009497249481465405,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.09216965112689104,
+       "lo": -0.23471188374990892,
+       "hi": 0.050372581496126834,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 199.84375,
+       "lo": -195.01351681312815,
+       "hi": 594.7010168131281,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "n": 8
+      }
+     },
+     "plates": 3219
+    },
+    "naive_average": {
+     "plate_waste_g_per_plate": {
+      "mean": 26.864525971410572,
+      "lo": 25.40458713046523,
+      "hi": 28.324464812355913,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.15151135611270805,
+      "lo": 0.1340836968812639,
+      "hi": 0.1689390153441522,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.9186785971992086,
+      "lo": 0.8130038243154539,
+      "hi": 1.0243533700829632,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2302.65625,
+      "lo": 1772.7969603112945,
+      "hi": 2832.5155396887058,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.1875,
+      "lo": 0.09093858357057338,
+      "hi": 0.2840614164294266,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 199.28830254267217,
+      "lo": 190.84904061530622,
+      "hi": 207.72756447003812,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 199.9478297912009,
+      "lo": 191.23830247858342,
+      "hi": 208.65735710381836,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.14551566642542357,
+      "lo": 0.12513403891601932,
+      "hi": 0.16589729393482783,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": -0.24262059786183565,
+       "lo": -3.37181533226136,
+       "hi": 2.8865741365376887,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.056559245957244236,
+       "lo": -0.08499722598933578,
+       "hi": -0.028121265925152693,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.2947011619051674,
+       "lo": -0.41675301204524523,
+       "hi": -0.17264931176508952,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 335.625,
+       "lo": -226.77182331517474,
+       "hi": 898.0218233151747,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": -0.03125,
+       "lo": -0.105,
+       "hi": 0.042499999999999996,
+       "n": 8
+      }
+     },
+     "plates": 3219
+    },
+    "proofplate": {
+     "plate_waste_g_per_plate": {
+      "mean": 28.278600469875727,
+      "lo": 26.51579847526919,
+      "hi": 30.041402464482264,
+      "n": 8
+     },
+     "left_hungry_rate": {
+      "mean": 0.1306628675690943,
+      "lo": 0.1137233159053321,
+      "hi": 0.14760241923285647,
+      "n": 8
+     },
+     "refill_trips_per_plate": {
+      "mean": 0.7796644095278336,
+      "lo": 0.6812087253776451,
+      "hi": 0.878120093678022,
+      "n": 8
+     },
+     "kitchen_surplus_g_per_meal": {
+      "mean": 2423.28125,
+      "lo": 1985.0828407803476,
+      "hi": 2861.4796592196526,
+      "n": 8
+     },
+     "stockout_meal_rate": {
+      "mean": 0.109375,
+      "lo": 0.022335715458067867,
+      "hi": 0.19641428454193213,
+      "n": 8
+     },
+     "first_portion_g": {
+      "mean": 206.59325317241007,
+      "lo": 198.66816668008994,
+      "hi": 214.5183396647302,
+      "n": 8
+     },
+     "eaten_g_per_plate": {
+      "mean": 201.63095950778526,
+      "lo": 192.95928080085682,
+      "hi": 210.3026382147137,
+      "n": 8
+     },
+     "reported_wanted_more_rate": {
+      "mean": 0.12127064353783232,
+      "lo": 0.10474524496767094,
+      "hi": 0.13779604210799368,
+      "n": 8
+     },
+     "paired_vs_conventional": {
+      "plate_waste_g_per_plate": {
+       "mean": 1.171453900603316,
+       "lo": -1.8220680352495533,
+       "hi": 4.164975836456185,
+       "n": 8
+      },
+      "left_hungry_rate": {
+       "mean": -0.07740773450085799,
+       "lo": -0.10128203336120162,
+       "hi": -0.053533435640514354,
+       "n": 8
+      },
+      "refill_trips_per_plate": {
+       "mean": -0.4337153495765424,
+       "lo": -0.5445096433997555,
+       "hi": -0.3229210557533293,
+       "n": 8
+      },
+      "kitchen_surplus_g_per_meal": {
+       "mean": 456.25,
+       "lo": -57.840175872454665,
+       "hi": 970.3401758724547,
+       "n": 8
+      },
+      "stockout_meal_rate": {
+       "mean": -0.109375,
+       "lo": -0.2127378210134434,
+       "hi": -0.006012178986556593,
+       "n": 8
+      }
+     },
+     "plates": 3219
+    }
+   },
+   "prediction": {
+    "n_uncensored": 2100,
+    "mae_g": {
+     "mean": 36.47684480761511,
+     "lo": 34.282496961402835,
+     "hi": 38.67119265382738,
+     "n": 8
+    },
+    "coverage_80": {
+     "mean": 0.7970836800509761,
+     "lo": 0.7770579911072696,
+     "hi": 0.8171093689946826,
+     "n": 8
+    },
+    "mean_interval_width_g": {
+     "mean": 128.120862558504,
+     "lo": 119.98922396284917,
+     "hi": 136.25250115415884,
+     "n": 8
+    },
+    "n_censored": 371,
+    "censored_mean_log_score": {
+     "mean": -0.8302726256000751,
+     "lo": -0.9081839447904236,
+     "hi": -0.7523613064097265,
+     "n": 8
+    }
+   },
+   "series_seed0": {
+    "conventional": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 36.7
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 25.0
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 20.76
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 24.44
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 33.23
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 38.72
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 27.26
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 29.78
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 27.63
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 26.66
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 21.06
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 34.58
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 36.13
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 32.36
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 25.57
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 19.27
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 19.45
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 34.13
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 27.82
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 28.98
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 21.9
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 26.02
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 35.83
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 25.37
+     }
+    ],
+    "small_plus_seconds": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 15.09
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 12.52
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 8.63
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 10.6
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 13.82
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 17.02
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 12.76
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 14.47
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 12.33
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 15.0
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 7.88
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 15.52
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 14.58
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 14.02
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 7.81
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 10.55
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 11.33
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 13.84
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 10.51
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 14.93
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 9.92
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 11.79
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 12.85
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 11.6
+     }
+    ],
+    "cohort": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 36.7
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 25.0
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 20.76
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 24.44
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 33.23
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 38.72
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 27.26
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 29.78
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 27.63
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 26.66
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 21.06
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 34.58
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 36.13
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 32.36
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 25.57
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 19.27
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 19.45
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 34.13
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 27.82
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 28.98
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 21.9
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 26.02
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 35.83
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 25.37
+     }
+    ],
+    "naive_average": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 36.7
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 22.3
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 17.65
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 17.18
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 27.51
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 33.82
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 19.98
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 25.65
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 25.07
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 26.57
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 14.27
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 29.4
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 30.42
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 33.87
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 20.64
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 16.85
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 20.02
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 38.87
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 26.73
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 29.17
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 20.84
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 28.68
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 37.28
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 22.78
+     }
+    ],
+    "proofplate": [
+     {
+      "meal": 0,
+      "waste_per_plate_g": 36.7
+     },
+     {
+      "meal": 1,
+      "waste_per_plate_g": 23.63
+     },
+     {
+      "meal": 2,
+      "waste_per_plate_g": 21.65
+     },
+     {
+      "meal": 3,
+      "waste_per_plate_g": 20.88
+     },
+     {
+      "meal": 4,
+      "waste_per_plate_g": 28.44
+     },
+     {
+      "meal": 5,
+      "waste_per_plate_g": 36.0
+     },
+     {
+      "meal": 6,
+      "waste_per_plate_g": 20.67
+     },
+     {
+      "meal": 7,
+      "waste_per_plate_g": 28.76
+     },
+     {
+      "meal": 8,
+      "waste_per_plate_g": 28.93
+     },
+     {
+      "meal": 9,
+      "waste_per_plate_g": 27.13
+     },
+     {
+      "meal": 10,
+      "waste_per_plate_g": 15.06
+     },
+     {
+      "meal": 11,
+      "waste_per_plate_g": 29.48
+     },
+     {
+      "meal": 12,
+      "waste_per_plate_g": 33.4
+     },
+     {
+      "meal": 13,
+      "waste_per_plate_g": 36.25
+     },
+     {
+      "meal": 14,
+      "waste_per_plate_g": 24.0
+     },
+     {
+      "meal": 15,
+      "waste_per_plate_g": 17.1
+     },
+     {
+      "meal": 16,
+      "waste_per_plate_g": 19.77
+     },
+     {
+      "meal": 17,
+      "waste_per_plate_g": 38.13
+     },
+     {
+      "meal": 18,
+      "waste_per_plate_g": 23.59
+     },
+     {
+      "meal": 19,
+      "waste_per_plate_g": 29.4
+     },
+     {
+      "meal": 20,
+      "waste_per_plate_g": 17.86
+     },
+     {
+      "meal": 21,
+      "waste_per_plate_g": 25.55
+     },
+     {
+      "meal": 22,
+      "waste_per_plate_g": 36.39
+     },
+     {
+      "meal": 23,
+      "waste_per_plate_g": 23.0
+     }
+    ]
+   }
+  }
+ ],
+ "limitations": [
+  "Behaviour (who walks back for seconds, who reports wanting more) follows stated assumptions, not observed diners.",
+  "'Left wanting more' uses the simulator's hidden demand, which no real kitchen can observe.",
+  "Stock-outs are scored after the fact and do not feed back into what later diners received.",
+  "A simulated difference is a property of this simulator. Field effect is unproven until measured in a pilot."
+ ],
+ "runtime_seconds": 308.9,
+ "sha256": "6e74b6d77545a5607656107de55420e4ce83641ffb7b35a6cdd17b7ad2fe994c",
+ "frontier": {
+  "status": "SIMULATED",
+  "seeds": [
+   101,
+   202,
+   303,
+   404,
+   505,
+   606,
+   707,
+   808
+  ],
+  "default_friction_g": 20.0,
+  "worlds": {
+   "baseline": {
+    "fixed": [
+     {
+      "scoops": 2.0,
+      "plate_waste_g_per_plate": 12.39634302482527,
+      "left_hungry_rate": 0.3578958626543213,
+      "refill_trips_per_plate": 1.9149440361354233,
+      "first_portion_g": 120.0,
+      "n_seeds": 8
+     },
+     {
+      "scoops": 2.5,
+      "plate_waste_g_per_plate": 18.6264262398902,
+      "left_hungry_rate": 0.27393347199909385,
+      "refill_trips_per_plate": 1.4736218219728392,
+      "first_portion_g": 150.0,
+      "n_seeds": 8
+     },
+     {
+      "scoops": 3.0,
+      "plate_waste_g_per_plate": 28.93972811090218,
+      "left_hungry_rate": 0.1980085475885533,
+      "refill_trips_per_plate": 1.0810154096211964,
+      "first_portion_g": 180.0,
+      "n_seeds": 8
+     },
+     {
+      "scoops": 3.5,
+      "plate_waste_g_per_plate": 43.820659639900555,
+      "left_hungry_rate": 0.13424254225410504,
+      "refill_trips_per_plate": 0.7635821252807911,
+      "first_portion_g": 210.0,
+      "n_seeds": 8
+     },
+     {
+      "scoops": 4.0,
+      "plate_waste_g_per_plate": 62.6203212804581,
+      "left_hungry_rate": 0.09007244395536797,
+      "refill_trips_per_plate": 0.5167614481537492,
+      "first_portion_g": 240.0,
+      "n_seeds": 8
+     }
+    ],
+    "proofplate": [
+     {
+      "friction_g": 2.0,
+      "plate_waste_g_per_plate": 22.359751805407527,
+      "left_hungry_rate": 0.15926289044566722,
+      "refill_trips_per_plate": 0.9558496937938219,
+      "first_portion_g": 184.59458093849065,
+      "n_seeds": 8
+     },
+     {
+      "friction_g": 8.0,
+      "plate_waste_g_per_plate": 23.245534966630352,
+      "left_hungry_rate": 0.14712340344907943,
+      "refill_trips_per_plate": 0.8884664455097038,
+      "first_portion_g": 188.00117677536105,
+      "n_seeds": 8
+     },
+     {
+      "friction_g": 20.0,
+      "plate_waste_g_per_plate": 29.494452358448687,
+      "left_hungry_rate": 0.10755086519317689,
+      "refill_trips_per_plate": 0.6556308063491139,
+      "first_portion_g": 203.6493343972018,
+      "n_seeds": 8
+     },
+     {
+      "friction_g": 40.0,
+      "plate_waste_g_per_plate": 40.1635645274429,
+      "left_hungry_rate": 0.07405438903844551,
+      "refill_trips_per_plate": 0.420606536833781,
+      "first_portion_g": 223.68367531712124,
+      "n_seeds": 8
+     }
+    ],
+    "naive_average": {
+     "plate_waste_g_per_plate": 25.944420247379462,
+     "left_hungry_rate": 0.1431117808131338,
+     "refill_trips_per_plate": 0.8405512579865235,
+     "first_portion_g": 192.17712824881772,
+     "n_seeds": 8
+    },
+    "equal_availability": {
+     "proofplate_left_wanting_more": 0.10755086519317689,
+     "proofplate_waste_g": 29.494452358448687,
+     "fixed_waste_g_at_same_rate": 55.181161805204276,
+     "within_fixed_range": true,
+     "note": "Fixed-portion waste is linearly interpolated between the two neighbouring fixed portions."
+    }
+   },
+   "seconds_friction": {
+    "fixed": [
+     {
+      "scoops": 2.0,
+      "plate_waste_g_per_plate": 7.891291556534506,
+      "left_hungry_rate": 0.6506224696454843,
+      "refill_trips_per_plate": 0.6788698397219721,
+      "first_portion_g": 120.0,
+      "n_seeds": 8
+     },
+     {
+      "scoops": 2.5,
+      "plate_waste_g_per_plate": 14.683487302978483,
+      "left_hungry_rate": 0.525252399539746,
+      "refill_trips_per_plate": 0.5343062207300614,
+      "first_portion_g": 150.0,
+      "n_seeds": 8
+     },
+     {
+      "scoops": 3.0,
+      "plate_waste_g_per_plate": 25.641262962712904,
+      "left_hungry_rate": 0.3959010378456257,
+      "refill_trips_per_plate": 0.3974286749446958,
+      "first_portion_g": 180.0,
+      "n_seeds": 8
+     },
+     {
+      "scoops": 3.5,
+      "plate_waste_g_per_plate": 41.24936273597605,
+      "left_hungry_rate": 0.28250275036771927,
+      "refill_trips_per_plate": 0.2864612494391657,
+      "first_portion_g": 210.0,
+      "n_seeds": 8
+     },
+     {
+      "scoops": 4.0,
+      "plate_waste_g_per_plate": 60.88432145670288,
+      "left_hungry_rate": 0.19038982596867382,
+      "refill_trips_per_plate": 0.19941546267252908,
+      "first_portion_g": 240.0,
+      "n_seeds": 8
+     }
+    ],
+    "proofplate": [
+     {
+      "friction_g": 2.0,
+      "plate_waste_g_per_plate": 16.501851260686575,
+      "left_hungry_rate": 0.420205145148281,
+      "refill_trips_per_plate": 0.45608080923203553,
+      "first_portion_g": 178.79069487205552,
+      "n_seeds": 8
+     },
+     {
+      "friction_g": 8.0,
+      "plate_waste_g_per_plate": 17.987978007435746,
+      "left_hungry_rate": 0.3848491959716175,
+      "refill_trips_per_plate": 0.4149990637981952,
+      "first_portion_g": 183.49655638064755,
+      "n_seeds": 8
+     },
+     {
+      "friction_g": 20.0,
+      "plate_waste_g_per_plate": 25.105132905030203,
+      "left_hungry_rate": 0.2837354918745064,
+      "refill_trips_per_plate": 0.3045080597628509,
+      "first_portion_g": 200.56237506034915,
+      "n_seeds": 8
+     },
+     {
+      "friction_g": 40.0,
+      "plate_waste_g_per_plate": 36.86346223807554,
+      "left_hungry_rate": 0.1883228606964247,
+      "refill_trips_per_plate": 0.19765203161883146,
+      "first_portion_g": 221.6077496583963,
+      "n_seeds": 8
+     }
+    ],
+    "naive_average": {
+     "plate_waste_g_per_plate": 13.564761251208724,
+     "left_hungry_rate": 0.4794236370209408,
+     "refill_trips_per_plate": 0.4949921560861962,
+     "first_portion_g": 166.72536560840274,
+     "n_seeds": 8
+    },
+    "equal_availability": {
+     "proofplate_left_wanting_more": 0.2837354918745064,
+     "proofplate_waste_g": 25.105132905030203,
+     "fixed_waste_g_at_same_rate": 41.079688635418535,
+     "within_fixed_range": true,
+     "note": "Fixed-portion waste is linearly interpolated between the two neighbouring fixed portions."
+    }
+   }
+  },
+  "runtime_seconds": 225.8
+ }
+}

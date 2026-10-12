@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+apps/web/dist/
+build/
+*.db
+.env
+.env.*
+services/api/proofplate/static/
+test-results/
+.DS_Store
